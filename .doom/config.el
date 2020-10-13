@@ -56,6 +56,7 @@
 (map! "C-s" 'swiper-isearch)
 
 (setq org-roam-directory "~/org-roam")
+(setq org-roam-tag-sources '(prop all-directories))
 
 (after! org-roam
   (map! :leader
@@ -84,3 +85,10 @@
   (org-journal-date-format "%A, %d %B %Y"))
 
 (setq org-journal-enable-agenda-integration t)
+
+(map! :leader
+      (:prefix ("j" . "journal")
+       :desc "Create new journal entry" "j" #'org-journal-new-entry
+       :desc "Open previous entry" "p" #'org-journal-previous-entry
+       :desc "Open next entry" "n" #'org-journal-open-next-entry
+       :desc "Search Journal" "s" #'org-journal-search-forever))
