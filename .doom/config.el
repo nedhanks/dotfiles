@@ -76,18 +76,29 @@
   :config
   (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
 
+(defun org-journal-file-header-func (time)
+  "Custom function to create journal header."
+  (concat
+    (pcase org-journal-file-type
+      (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
+      (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
+      (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
+      (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
+
+
 (use-package! org-journal
   :bind("C-c n j" . org-journal-new-entry)
   :custom
-  (org-journal-dir "~/org-roam")
-  (org-journal-date-prefile "#+TITLE: ")
-  (org-journal-file-format "%Y-%m/%Y-%m-%d.org")
-  (org-journal-date-format "%A, %d %B %Y"))
+  (org-journal-dir "~/org-roam/journal")
+  (org-journal-file-header "#+TITLE: Weekly Journal\n")
+  (org-journal-file-type "weekly")
+  (org-journal-start-on-weekday 1)
+  (org-journal-file-format "%Y-%m/%F-%V.org"))
 
 (setq org-journal-enable-agenda-integration t)
 
 (map! :leader
-      (:prefix ("j" . "journal")
+      (:prefix ("n j" . "journal")
        :desc "Create new journal entry" "j" #'org-journal-new-entry
        :desc "Open previous entry" "p" #'org-journal-previous-entry
        :desc "Open next entry" "n" #'org-journal-open-next-entry
