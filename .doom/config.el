@@ -29,7 +29,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org-roam/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -55,51 +55,6 @@
 ;;
 (map! "C-s" 'swiper-isearch)
 
-(setq org-roam-directory "~/org-roam")
-(setq org-roam-tag-sources '(prop all-directories))
+(load! "roam.el")
+(load! "journal.el")
 
-(after! org-roam
-  (map! :leader
-        :prefix "n"
-        :desc "org-roam" "l" #'org-roam
-        :desc "org-roam-insert" "i" #'org-roam-insert
-        :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
-        :desc "org-roam-find-file" "f" #'org-roam-find-file
-        :desc "org-roam-show-graph" "g" #'org-roam-show-graph
-        :desc "org-roam-capture" "c" #'org-roam-capture))
-
-(require 'company-org-roam)
-
-(use-package! company-org-roam
-  :when (featurep! :completion company)
-  :after org-roam
-  :config
-  (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
-
-(defun org-journal-file-header-func (time)
-  "Custom function to create journal header."
-  (concat
-    (pcase org-journal-file-type
-      (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
-      (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
-      (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
-      (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
-
-
-(use-package! org-journal
-  :bind("C-c n j" . org-journal-new-entry)
-  :custom
-  (org-journal-dir "~/org-roam/journal")
-  (org-journal-file-header "#+TITLE: Weekly Journal\n")
-  (org-journal-file-type "weekly")
-  (org-journal-start-on-weekday 1)
-  (org-journal-file-format "%Y-%m/%F-%V.org"))
-
-(setq org-journal-enable-agenda-integration t)
-
-(map! :leader
-      (:prefix ("n j" . "journal")
-       :desc "Create new journal entry" "j" #'org-journal-new-entry
-       :desc "Open previous entry" "p" #'org-journal-previous-entry
-       :desc "Open next entry" "n" #'org-journal-open-next-entry
-       :desc "Search Journal" "s" #'org-journal-search-forever))
