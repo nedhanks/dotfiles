@@ -55,6 +55,11 @@
 ;;
 (map! "C-s" 'swiper-isearch)
 
+(after! deft
+  (setq deft-directory "~/org-roam")
+  (setq! deft-recursive t)
+  (setq! deft-use-filename-as-title t))
+
 (load! "roam.el")
 (load! "journal.el")
 

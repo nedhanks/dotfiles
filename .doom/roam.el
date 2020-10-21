@@ -22,15 +22,20 @@
          :unarrowed t)
         ("n" "notes" plain (function org-roam-capture--get-point)
          "%?"
-         :file-name "notes/%Y-%m/%<%Y%m%d>-${slug}"
+         :file-name "notes/%<%Y-%m>/%<%Y%m%d>-${slug}"
          :head "#+TITLE: ${title}\n#+ROAM_TAGS: \n#+CREATED: %u\n#+LAST_MODIFIED: %U\n"
-         unnarrowed t)
+         :unnarrowed t)
+        ("e" "emacs" plain (function org-roam-capture--get-point)
+         "%?"
+         :file-name "notes/%<%Y-%m>/%<%Y%m%d>-${slug}"
+         :head "#+TITLE: ${title}\n#+ROAM_TAGS: \n#+CREATED: %u\n#+LAST_MODIFIED: %U\n"
+         :unnarrowed t)
         ("a" "AWS" plain (function org-roam-capture--get-point)
 	 "%?"
          :file-name "aws/$<%Y%m%d>-${slug}"
          :head "#+TITLE: ${title}\n#+CREATED: %u\n#+LAST_MODIFIED: %U\n#+ROAM_TAGS: \n"
 	 :unnarrowed t)
-        ("e" "emacs" "emacs/%Y-m/%<%Y%m%d>-${slug}")))
+        ))
 
 (require 'company-org-roam)
 
