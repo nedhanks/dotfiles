@@ -85,7 +85,7 @@ if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
 else
    #export EDITOR='mvim --remote-wait-silent'
-   export EDITOR='emacs -c'
+   export EDITOR='ec'
 fi
 
 # Compilation flags
