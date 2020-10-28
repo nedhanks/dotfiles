@@ -76,3 +76,5 @@
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+(toggle-frame-fullscreen)
