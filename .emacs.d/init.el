@@ -1,8 +1,38 @@
-(setq inhibit-startup-message t)
-(toggle-frame-maximized)
+;; startup performance
+(setq gc-cons-threshold (* 50 1000 1000))
+
+;; Profile emacs startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+;; load per system settings
+(let ((per-system-settings (expand-file-name "per-system-settings.d/per-system-settings.el" user-emacs-directory)))
+	(when (file-exists-p per-system-settings)
+		(load-file per-system-settings)))
+
+;; move cruft
+(setq cruft-emacs-directory "~/.cache/emacs.d"
+			backup-directory-alist `(("." . ,(expand-file-name "backups" cruft-emacs-directory)))
+			url-history-file (expand-file-name "url/history" cruft-emacs-directory)
+			auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" cruft-emacs-directory)
+			projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" cruft-emacs-directory))
+
+(setq custom-file
+			(if (boundp 'server-socket-dir)
+					(expand-file-name "custome.el" server-socket-dir)
+				(expand-file-name (format "emacs-custom-%s.el" (user-uid)) cruft-emacs-directory)))
+(load custom-file t)
+
+;; add elisp to load-path
+(let ((default-directory (expand-file-name "elisp.d/" user-emacs-directory)))
+	(normal-top-level-add-to-load-path '("."))
+	(normal-top-level-add-subdirs-to-load-path))
 
 ;; initialize package sources
-
 (require 'package)
 
 (package-initialize)
@@ -19,63 +49,25 @@
 
 (use-package command-log-mode)
 
-(use-package counsel
-    :defer t
-    :config
-    (counsel-mode 1))
-
-(use-package ivy
-    :config
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (ivy-mode 1))
-
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; ui
+(load "ui-config")
+
+;; ivy
+(load "ivy-config")
+
+;; programming languages
+(load "lsp-config")
+
+;; go
+(load "go-config")
+
 
 (server-start)
 
-;; UI Personalization
-	
-(column-number-mode)
-(global-display-line-numbers-mode t)
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                erc-mode-hook
-                term-mode-hook
-                eshell-mode-hook
-                vterm-mode-hook
-                neotree-mode-hook
-                telega-chat-mode-hook
-                telega-root-mode-hook
-                telega-webpage-mode-hook
-                dashboard-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(setq vc-follow-symlinks t)
 
-(use-package spacegray-theme :defer t)
-(use-package doom-themes :defer t)
+;;(setq inhibit-startup-message t)
+(toggle-frame-maximized)
 
-(load-theme 'doom-palenight t)
-
-(use-package emojify
-	     :hook (erc-mode . emojify-mode)
-	     :commands emojify-mode)
-
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(doom-modeline emojify use-package spacemacs-theme spacegray-theme panda-theme overcast-theme monokai-theme material-theme lush-theme ivy idea-darkula-theme doom-themes command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

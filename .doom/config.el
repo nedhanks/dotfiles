@@ -63,3 +63,16 @@
 (load! "roam.el")
 (load! "journal.el")
 
+(setq! python-shell-interpreter "python3"
+       flycheck-python-pycompile-executable "python3")
+
+;; (use-package! org-bullets
+;;  :ensure t
+;;  :config
+;;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;;
+
+(use-package! org-superstar
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))

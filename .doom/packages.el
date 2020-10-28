@@ -52,3 +52,6 @@
 (package! org-journal)
 (package! company-org-roam
  :recipe (:host github :repo "jethrokuan/company-org-roam"))
+
+;; (package! org-bullets)
+(package! org-superstar)
