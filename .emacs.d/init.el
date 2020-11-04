@@ -49,6 +49,9 @@
 
 (use-package command-log-mode)
 
+(use-package company)
+(add-hook 'after-init-hook 'global-company-mode)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; ui
@@ -63,6 +66,11 @@
 ;; go
 (load "go-config")
 
+;; org-mode, org-roam, org-journal
+(load "init-org")
+
+;; restclient
+(load "init-restclient")
 
 (server-start)
 

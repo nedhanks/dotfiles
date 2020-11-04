@@ -37,6 +37,13 @@
 	 :unnarrowed t)
         ))
 
+(setq org-roam-capture-ref-templates
+      '(("r" "ref" plain (function org-roam-capture--get-point)
+         "%?"
+         :file-name "ref/%<%Y-%m>/%<%Y%m%d>-${slug}"
+         :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_tags: \n#+created: %u\n#+last_modified: %U\n* URL: ${ref}"
+         :unnarrowed t)))
+
 (require 'company-org-roam)
 
 (use-package! company-org-roam
@@ -44,3 +51,5 @@
   :after org-roam
   :config
   (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
+
+(require 'org-roam-protocol)

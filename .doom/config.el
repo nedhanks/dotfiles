@@ -77,4 +77,7 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 
+(use-package! emojify
+  :hook (after-init . global-emojify-mode))
+
 (toggle-frame-fullscreen)

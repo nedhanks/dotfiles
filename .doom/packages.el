@@ -55,3 +55,5 @@
 
 ;; (package! org-bullets)
 (package! org-superstar)
+
+(package! emojify)
