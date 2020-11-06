@@ -66,12 +66,6 @@
 (setq! python-shell-interpreter "python3"
        flycheck-python-pycompile-executable "python3")
 
-;; (use-package! org-bullets
-;;  :ensure t
-;;  :config
-;;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;;
-
 (use-package! org-superstar
   :ensure t
   :config
@@ -79,5 +73,7 @@
 
 (use-package! emojify
   :hook (after-init . global-emojify-mode))
+
+(map! :n "C-c g" #'global-command-log-mode)
 
 (toggle-frame-fullscreen)
