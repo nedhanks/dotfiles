@@ -1,7 +1,7 @@
 ;;; roam.el -*- lexical-binding: t; -*-
 ;;;
 
-(setq org-roam-directory "~/org-roam")
+(setq org-roam-directory "~/Dropbox/org-roam")
 (setq org-roam-tag-sources '(prop all-directories))
 
 (after! org-roam
