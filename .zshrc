@@ -103,10 +103,10 @@ source ~/.purepower
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Workspace/google-cloud-sdk/path.zsh.inc' ]; then . '/Workspace/google-cloud-sdk/path.zsh.inc'; fi
+#if [ -f '/Workspace/google-cloud-sdk/path.zsh.inc' ]; then . '/Workspace/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Workspace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Workspace/google-cloud-sdk/completion.zsh.inc'; fi
+#if [ -f '/Workspace/google-cloud-sdk/completion.zsh.inc' ]; then . '/Workspace/google-cloud-sdk/completion.zsh.inc'; fi
 
 if [ -f /usr/local/share/zsh/site-functions ]; then . '/usr/local/share/zsh/site-functions'; fi
 
@@ -125,3 +125,11 @@ if [ -f /usr/local/share/zsh/site-functions ]; then . '/usr/local/share/zsh/site
 #unset __conda_setup
 # <<< conda initialize <<<
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+PATH="/Users/ned.hanks/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/ned.hanks/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/ned.hanks/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/ned.hanks/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/ned.hanks/perl5"; export PERL_MM_OPT;

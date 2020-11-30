@@ -62,6 +62,7 @@
 
 (load! "roam.el")
 (load! "journal.el")
+(load! "erc.el")
 
 (setq! python-shell-interpreter "python3"
        flycheck-python-pycompile-executable "python3")
@@ -77,6 +78,12 @@
 (map! :n "C-c g" #'global-command-log-mode)
 
 (setq! latex-run-command "pdflatex")
+
+(after! projectile
+(projectile-register-project-type 'ledger '(".ledgerrc" "main.ledger")
+                                  :project-file ".ledgerrc"
+                                  :run "ledger bal"))
+
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 ;; (toggle-frame-maximized)
