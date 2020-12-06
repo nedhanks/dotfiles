@@ -9,8 +9,7 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 ;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                erc-mode-hook
+(dolist (mode '(erc-mode-hook
                 term-mode-hook
                 eshell-mode-hook
                 vterm-mode-hook
