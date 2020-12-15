@@ -13,7 +13,7 @@
   :bind
   ("C-c n j" . org-journal-new-entry)
   :custom
-  (org-journal-dir "~/org-roam/journal")
+  (org-journal-dir "~/Dropbox/org/journal")
   (org-journal-file-type `weekly)
   (org-journal-file-header 'org-journal-file-header-func)
   (org-journal-start-on-weekday 1)
