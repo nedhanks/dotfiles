@@ -54,6 +54,6 @@
  :recipe (:host github :repo "jethrokuan/company-org-roam"))
 
 ;; (package! org-bullets)
-(package! org-superstar)
+;; (package! org-superstar)
 
-(package! emojify)
+;; (package! emojify)

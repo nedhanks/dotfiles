@@ -30,6 +30,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
+(setq org-roam-directory "~/Dropbox/roam/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -55,15 +56,17 @@
 ;;
 (map! "C-s" 'swiper-isearch)
 
+(load! "org.el")
 (load! "roam.el")
 (load! "journal.el")
 (load! "erc.el")
+(load! "ledger.el")
 
 (setq! python-shell-interpreter "python3"
        flycheck-python-pycompile-executable "python3")
 
-(use-package! emojify
-  :hook (after-init . global-emojify-mode))
+;; (use-package! emojify
+;;  :hook (after-init . global-emojify-mode))
 
 (map! :n "C-c g" #'global-command-log-mode)
 
@@ -73,7 +76,6 @@
 (projectile-register-project-type 'ledger '(".ledgerrc" "main.ledger")
                                   :project-file ".ledgerrc"
                                   :run "ledger bal"))
-
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 ;; (toggle-frame-maximized)

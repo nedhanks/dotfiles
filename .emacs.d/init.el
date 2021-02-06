@@ -61,16 +61,16 @@
 (load "ivy-config")
 
 ;; programming languages
-(load "lsp-config")
+;; (load "lsp-config")
 
 ;; go
-(load "go-config")
+;; (load "go-config")
 
 ;; org-mode, org-roam, org-journal
 (load "init-org")
 
 ;; restclient
-(load "init-restclient")
+;; (load "init-restclient")
 
 (server-start)
 
